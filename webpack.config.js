@@ -20,6 +20,17 @@ module.exports = {
           }
         }
       },
+      {
+        test: /.png$/,
+        use: {
+          loader: "url-loader",
+          options: {
+            name: "[name]_[hash].[ext]",
+            outputPath: "imgs",
+            limit: 1024,
+          }
+        }
+      }
     ],
   },
 }
