@@ -1,4 +1,8 @@
 const path = require("path")
+
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+
 module.exports = {
   mode: "production",
   entry: {
@@ -8,20 +12,13 @@ module.exports = {
     filename: "main.js",
     path: path.resolve(__dirname, "dist")
   },
+  plugins: [
+    new MiniCssExtractPlugin()
+  ],
   module: {
     rules: [
       {
-        test: /.gif$/,
-        use: {
-          loader: "file-loader",
-          options: {
-            name: "[name]_[hash].[ext]",
-            outputPath: "images",
-          }
-        }
-      },
-      {
-        test: /.png$/,
+        test: /\.(png|gif|jpe?g)$/,
         use: {
           loader: "url-loader",
           options: {
@@ -30,7 +27,50 @@ module.exports = {
             limit: 1024,
           }
         }
-      }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          // "style-loader",
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              importLoaders: 2
+            },
+          },
+          "postcss-loader",
+          "stylus-loader",
+        ]
+      },
+      {
+        test: /\.styl$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          "postcss-loader",
+          "stylus-loader",
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          "postcss-loader",
+          "less-loader",
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          "postcss-loader",
+          "sass-loader",
+        ]
+      },
     ],
   },
 }

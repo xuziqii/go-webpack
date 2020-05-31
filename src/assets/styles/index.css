@@ -1,0 +1,7 @@
+/* @import "./less-style.less"
+@import "./scss-style.scss"; */;
+@import "./stylus-style.styl";
+
+body {
+  background: green;
+}
