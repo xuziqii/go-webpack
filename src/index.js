@@ -21,3 +21,10 @@ root.append(img)
 
 const res = add([1,2,3,4], 15)
 console.log(res)
+
+if (module.hot) {
+  module.hot.accept("./utils", function () {
+    console.log('hmr')
+    console.log(add([1,2,3,4], 15))
+  })
+}

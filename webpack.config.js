@@ -1,5 +1,6 @@
 const path = require("path")
 
+const webpack = require("webpack")
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin")
@@ -22,6 +23,7 @@ module.exports = {
     hotOnly: true,
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: "./index.html"
